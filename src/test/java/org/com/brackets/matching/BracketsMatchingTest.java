@@ -88,5 +88,9 @@ public class BracketsMatchingTest
        * 
        */
       assertEquals( true, bracketsMatching.checkBracketsMatching( "(( { {( (((({ { { [()]{ }{[()()]()} } } })))))((((({ { { [() ] { }{ [() () ]( )}}}})))))}} ) )" ) );
+      /**
+       * 
+       */
+      assertEquals( false, bracketsMatching.checkBracketsMatching( "(( { {( (((({ { { [()]{ }{[()()]()} } } })))))((((({ { { ) [() ] { }{ [() () ]( )}}}})))))}} ) )" ) );
    }
 }

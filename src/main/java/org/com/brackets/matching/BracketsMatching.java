@@ -39,11 +39,11 @@ import org.springframework.stereotype.Service;
 @Service("bracketsMatching")
 public class BracketsMatching
 {
-   private char[] bracket0 = { '{', '}' };
-   
-   private char[] bracket1 = { '(', ')' };
-   
-   private char[] bracket2 = { '[', ']' };
+   private char[][] bracket = { 
+                                { '{', '}' }, 
+                                { '(', ')' }, 
+                                { '[', ']' } 
+                              };
    /**
     * 
     * @param balancedStr
@@ -62,50 +62,26 @@ public class BracketsMatching
          char currentCharRead = balancedStr.charAt( index );
          if( currentCharRead != ' ' )
          {
-            if( bracket0[0] == currentCharRead || bracket1[0] == currentCharRead || bracket2[0] == currentCharRead )
+            if( checkChar( currentCharRead ) )
             {
                checked += currentCharRead;
             }
             else
             {
                boolean charFounded = false;
-               if( bracket0[1] == currentCharRead )
+               for( int j = 0; j < bracket.length; j++ )
                {
-                  //we have the character '}' we have to found '{'
-                  char c = getChar( checked );
-                  //char c = checked.charAt( checked.length() - 1 );
-                  if( c != ' ' && bracket0[0] == c )
+                  //we have found the character '?'
+                  if( bracket[j][1] == currentCharRead )
                   {
-                     //we remove the opposite character
-                     checked = checked.substring( 0, checked.length() - 1 );
-                     //marked the opposite character found
-                     charFounded = true;
-                  }
-               }
-               if( bracket1[1] == currentCharRead )
-               {
-                  //we have the character ')' we have to found '('
-                  char c = getChar( checked );
-                  //char c = checked.charAt( checked.length() - 1 );
-                  if( c != ' ' && bracket1[0] == c )
-                  {
-                     //we remove the opposite character
-                     checked = checked.substring( 0, checked.length() - 1 );
-                     //marked the opposite character found
-                     charFounded = true;
-                  }
-               }
-               if( bracket2[1] == currentCharRead )
-               {
-                  //we have the character ']' we have to found '['
-                  char c = getChar( checked );
-                  //char c = checked.charAt( checked.length() - 1 );
-                  if( c != ' ' && bracket2[0] == c )
-                  {
-                     //we remove the opposite character
-                     checked = checked.substring( 0, checked.length() - 1 );
-                     //marked the opposite character found
-                     charFounded = true;
+                     //we have the character '?' we have to found '?'
+                     if( bracket[j][0] == getChar( checked ) )
+                     {
+                        //we remove the opposite character
+                        checked = checked.substring( 0, checked.length() - 1 );
+                        //marked the opposite character found
+                        charFounded = true;
+                     }
                   }
                }
                //opposite character not found, processing is terminated
@@ -117,6 +93,15 @@ public class BracketsMatching
          }
       }
       return true;
+   }
+   
+   private boolean checkChar( char currentCharRead )
+   {
+      for( int i = 0; i < bracket.length; i++ )
+      {
+         if( bracket[i][0] == currentCharRead ) return true;
+      }
+      return false;
    }
    
    private char getChar( String checked )
