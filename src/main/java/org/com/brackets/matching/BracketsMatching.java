@@ -52,10 +52,8 @@ public class BracketsMatching
     */
    public boolean checkBracketsMatching( final String balancedStr )
    {
-      if( balancedStr == null || balancedStr.isEmpty() )
-      {
-         return true;
-      }
+      if( balancedStr == null || balancedStr.isEmpty() ) return true;
+      
       String checked = "";
       for( int index = 0; index < balancedStr.length(); index++ )
       {
