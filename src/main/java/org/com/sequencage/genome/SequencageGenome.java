@@ -76,6 +76,45 @@ import org.springframework.stereotype.Service;
  * 0 < N < 6
  * </p>
  * 
+ * 
+ * Examples
+ * 
+ * <p>
+ * Input :
+ * </p>
+ * <p>
+ * AAC
+ * CCTT
+ * </p>
+ * <p>
+ * Output  : 6 : AACCTT
+ * </p>
+ * 
+ * </p>
+ * Input :
+ * </p>
+ * <p>
+ * AGATTA
+ * GATTACA
+ * TACAGA
+ * </p>
+ * </p>
+ * Output : 10 : AGATTACAGA  
+ * </p>
+ * <p>
+ * Input :
+ * </p>
+ * 
+ * <p>
+ * TT
+ * AA
+ * ACT
+ * </p>
+ * 
+ * <p>
+ * Output : 5 : AACTT
+ * </p>
+ * 
  * @author  : Merzouk
  * @project : Exercices-coding-games
  * @package : org.com.sequencage.genome
