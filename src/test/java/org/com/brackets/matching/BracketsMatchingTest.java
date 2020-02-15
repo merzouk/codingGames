@@ -63,7 +63,7 @@ public class BracketsMatchingTest
       /**
        * 
        */
-      assertEquals( true, bracketsMatching.checkBracketsMatching( "({})" ) );
+      assertEquals( true, bracketsMatching.checkBracketsMatching( "( {}) " ) );
       /**
        * 
        */
