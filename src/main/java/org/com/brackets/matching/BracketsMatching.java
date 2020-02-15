@@ -39,11 +39,11 @@ import org.springframework.stereotype.Service;
 @Service("bracketsMatching")
 public class BracketsMatching
 {
-   private char[][] bracket = { 
-                                { '{', '}' }, 
-                                { '(', ')' }, 
-                                { '[', ']' } 
-                              };
+   private char[][] caracters = { 
+                                 { '{', '}' }, 
+                                 { '(', ')' }, 
+                                 { '[', ']' } 
+                               };
    /**
     * 
     * @param balancedStr
@@ -69,13 +69,13 @@ public class BracketsMatching
             else
             {
                boolean charFounded = false;
-               for( int j = 0; j < bracket.length; j++ )
+               for( int j = 0; j < caracters.length; j++ )
                {
                   //we have found the character '?'
-                  if( bracket[j][1] == currentCharRead )
+                  if( caracters[j][1] == currentCharRead )
                   {
                      //we have the character '?' we have to found '?'
-                     if( bracket[j][0] == getChar( checked ) )
+                     if( caracters[j][0] == getChar( checked ) )
                      {
                         //we remove the opposite character
                         checked = checked.substring( 0, checked.length() - 1 );
@@ -97,9 +97,9 @@ public class BracketsMatching
    
    private boolean checkChar( char currentCharRead )
    {
-      for( int i = 0; i < bracket.length; i++ )
+      for( int i = 0; i < caracters.length; i++ )
       {
-         if( bracket[i][0] == currentCharRead ) return true;
+         if( caracters[i][0] == currentCharRead ) return true;
       }
       return false;
    }
