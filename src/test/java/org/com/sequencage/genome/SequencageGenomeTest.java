@@ -30,7 +30,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * A Renseigner.
+ * 
  * @author  : Merzouk
  * @project : Exercices-coding-games
  * @package : org.com.sequencage.genome
@@ -91,5 +91,15 @@ public class SequencageGenomeTest
    {
       String[] subSequenceList = { "CCCTG", "TGACA", "CATGA" };
       assertEquals( "CCCTGACATGA", sequencageGenome.optimalSequence( subSequenceList ) );
+   }
+   
+   /**
+    * 
+    */
+   @Test
+   public void sequencageGenome06Test()
+   {
+      String[] subSequenceList = { "AGATTA", "GATTACA", "TACAGA" };
+      assertEquals( "AGATTACAGA", sequencageGenome.optimalSequence( subSequenceList ) );
    }
 }
