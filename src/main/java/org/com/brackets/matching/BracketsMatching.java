@@ -39,18 +39,18 @@ import org.springframework.stereotype.Service;
 @Service("bracketsMatching")
 public class BracketsMatching
 {
-   private char[][] caracters = { 
-                                 { '{', '}' }, 
-                                 { '(', ')' }, 
-                                 { '[', ']' } 
-                               };
+   private final char[][] caracters = { 
+                                          { '{', '}' }, 
+                                          { '(', ')' }, 
+                                          { '[', ']' } 
+                                      };
    /**
     * 
     * @param balancedStr
     * 
     * @return
     */
-   public boolean checkBracketsMatching( String balancedStr )
+   public boolean checkBracketsMatching( final String balancedStr )
    {
       if( balancedStr == null || balancedStr.isEmpty() )
       {
