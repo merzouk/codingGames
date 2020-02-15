@@ -43,8 +43,7 @@ public class BracketsMatching
    
    private char[] bracket1 = { '(', ')' };
    
-   private char[] bracket2 = { '[', ']' };   
-   
+   private char[] bracket2 = { '[', ']' };
    /**
     * 
     * @param balancedStr
@@ -61,56 +60,74 @@ public class BracketsMatching
       for( int index = 0; index < balancedStr.length(); index++ )
       {
          char currentCharRead = balancedStr.charAt( index );
-         if( bracket0[0] == currentCharRead || bracket1[0] == currentCharRead || bracket2[0] == currentCharRead )
+         if( currentCharRead != ' ' )
          {
-            checked += currentCharRead;
-         }
-         else
-         {
-            boolean charFounded = false;
-            if( bracket0[1] == currentCharRead )
+            if( bracket0[0] == currentCharRead || bracket1[0] == currentCharRead || bracket2[0] == currentCharRead )
             {
-               //we have the character '}' we have to found '{'
-               char c = checked.charAt( checked.length() - 1 );
-               if( bracket0[0] == c )
-               {
-                  //we remove the opposite character
-                  checked = checked.substring( 0, checked.length() - 1 );
-                  //marked the opposite character found
-                  charFounded = true;
-               }
+               checked += currentCharRead;
             }
-            if( bracket1[1] == currentCharRead )
+            else
             {
-               //we have the character ')' we have to found '('
-               char c = checked.charAt( checked.length() - 1 );
-               if( bracket1[0] == c )
+               boolean charFounded = false;
+               if( bracket0[1] == currentCharRead )
                {
-                  //we remove the opposite character
-                  checked = checked.substring( 0, checked.length() - 1 );
-                  //marked the opposite character found
-                  charFounded = true;
+                  //we have the character '}' we have to found '{'
+                  char c = getChar( checked );
+                  //char c = checked.charAt( checked.length() - 1 );
+                  if( c != ' ' && bracket0[0] == c )
+                  {
+                     //we remove the opposite character
+                     checked = checked.substring( 0, checked.length() - 1 );
+                     //marked the opposite character found
+                     charFounded = true;
+                  }
                }
-            }
-            if( bracket2[1] == currentCharRead )
-            {
-               //we have the character ']' we have to found '['
-               char c = checked.charAt( checked.length() - 1 );
-               if( bracket2[0] == c )
+               if( bracket1[1] == currentCharRead )
                {
-                  //we remove the opposite character
-                  checked = checked.substring( 0, checked.length() - 1 );
-                  //marked the opposite character found
-                  charFounded = true;
+                  //we have the character ')' we have to found '('
+                  char c = getChar( checked );
+                  //char c = checked.charAt( checked.length() - 1 );
+                  if( c != ' ' && bracket1[0] == c )
+                  {
+                     //we remove the opposite character
+                     checked = checked.substring( 0, checked.length() - 1 );
+                     //marked the opposite character found
+                     charFounded = true;
+                  }
                }
-            }
-            //opposite character not found, processing is terminated
-            if( !charFounded )
-            {
-               return false;
+               if( bracket2[1] == currentCharRead )
+               {
+                  //we have the character ']' we have to found '['
+                  char c = getChar( checked );
+                  //char c = checked.charAt( checked.length() - 1 );
+                  if( c != ' ' && bracket2[0] == c )
+                  {
+                     //we remove the opposite character
+                     checked = checked.substring( 0, checked.length() - 1 );
+                     //marked the opposite character found
+                     charFounded = true;
+                  }
+               }
+               //opposite character not found, processing is terminated
+               if( !charFounded )
+               {
+                  return false;
+               }
             }
          }
       }
       return true;
+   }
+   
+   private char getChar( String checked )
+   {
+      char c = ' ';
+      int i = 1;
+      do
+      {
+         c = checked.charAt( checked.length() - i );
+         i++;
+      } while( c == ' ' );
+      return c;
    }
 }
