@@ -56,6 +56,12 @@ public class SandpileAdditionTest
       logger.info( "initParams" );
       switch( testInfo.getTestMethod().get().getName() )
       {
+         case "sandpileAddition10Test":
+            array1 = new String[] { "1221", "1321", "2111","3123" };
+            array2 = new String[] { "1313", "1302", "1231","3210" };
+            expected = new int[][] { { 2, 3, 0, 3 }, { 0, 3, 3, 3 }, { 2, 1, 0 , 3}, {2, 2, 1, 2} };
+            matrixSize = 4;
+            break;
          case "sandpileAddition09Test":
             array1 = new String[] { "000", "030", "000" };
             array2 = new String[] { "000", "030", "000" };
@@ -138,6 +144,13 @@ public class SandpileAdditionTest
       array2 = null;
       expected = null;
       matrixSize = 0;
+   }
+   
+   @Test
+   public void sandpileAddition10Test() throws Exception
+   {
+      logger.info( "sandpileAddition10Test" );
+      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
