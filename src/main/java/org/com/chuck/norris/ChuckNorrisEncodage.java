@@ -84,9 +84,9 @@ public class ChuckNorrisEncodage
       {
          String get = getSerieBit( i, transform );
          if( get.contains( "0" ) )
-            result += ( result.length() == 0 ) ? ( "00 " + buildSerieZero( get ) ) : ( " 00 " + buildSerieZero( get ) );
+            result += ( result.length() == 0 ) ? ( "00 " +get  ) : ( " 00 " +  get  );
          else
-            result += ( result.length() == 0 ) ? ( "0 " + buildSerieZero( get ) ) : ( " 0 " + buildSerieZero( get ) );
+            result += ( result.length() == 0 ) ? ( "0 " + ( get.replace( "1", "0" ) ) ) : ( " 0 " + get.replace( "1", "0" ) );
          i += get.length();
       }
       return result;
@@ -99,7 +99,7 @@ public class ChuckNorrisEncodage
     */
    private String convertCharToAsciiCode( String str )
    {
-      StringBuilder binary = new StringBuilder();
+      String binary = new String();
       char[] chars = str.toCharArray();
       for( int j = 0; j < chars.length; j++ )
       {
@@ -107,18 +107,10 @@ public class ChuckNorrisEncodage
          for( int i = 0; i < 7; i++ )
          {
             val <<= 1;
-            binary.append( ( val & 128 ) == 0 ? 0 : 1 );
+            binary+=( ( val & 128 ) == 0 ? 0 : 1 );
          }
       }
-      return binary.toString();
-   }
-   
-   private String buildSerieZero( String get )
-   {
-      String str = "";
-      for( int i = 0; i < get.length(); i++ )
-         str += "0";
-      return str;
+      return binary;
    }
    
    private String getSerieBit( int index, String str )
