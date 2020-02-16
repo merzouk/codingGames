@@ -20,11 +20,17 @@
 package org.com.sequencage.genome;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -41,16 +47,86 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @TestMethodOrder(OrderAnnotation.class)
 public class SequencageGenomeTest
 {
+   private static final Logger logger          = LoggerFactory.getLogger( SequencageGenomeTest.class );
+   
+   private static String[]     subSequenceList = null;
+   
+   private static String       expected        = null;
+   
    @Autowired
-   private SequencageGenome sequencageGenome;
+   private SequencageGenome    sequencageGenome;
+   /**
+    * 
+    * @param testInfo
+    */
+   @BeforeEach
+   void initParamsTest( TestInfo testInfo )
+   {
+      logger.info( "initParamsTest" );
+      switch( testInfo.getTestMethod().get().getName() )
+      {
+         case "sequencageGenome01Test":
+            subSequenceList = new String[] { "AAC", "CCTT" };
+            expected = "AACCTT";
+            break;
+         case "sequencageGenome02Test":
+            subSequenceList = new String[] { "AGATTA", "GATTACA", "TACAGA" };
+            expected = "AGATTACAGA";
+            break;
+         case "sequencageGenome03Test":
+            subSequenceList = new String[] { "TT", "AA", "ACT" };
+            expected = "AACTT";
+            break;
+         case "sequencageGenome04Test":
+            subSequenceList = new String[] { "GAT", "AGATTA" };
+            expected = "AGATTA";
+            break;
+         case "sequencageGenome05Test":
+            subSequenceList = new String[] { "CCCTG", "TGACA", "CATGA" };
+            expected = "CCCTGACATGA";
+            break;
+         case "sequencageGenome06Test":
+            subSequenceList = new String[] { "AGATTA", "GATTACA", "TACAGA" };
+            expected = "AGATTACAGA";
+            break;
+         case "sequencageGenome07Test":
+            subSequenceList = new String[] { "TT", "AA", "ACT", "AACTT" };
+            expected = "AACTT";
+            break;
+         case "sequencageGenome08Test":
+            subSequenceList = new String[] { "CCCTG", "TGACA", "CATGA", "CCCTGACATGA" };
+            expected = "CCCTGACATGA";
+            break;
+         default:
+            logger.info( "default not test" );
+            break;
+      }
+      assertNotNull( sequencageGenome );
+      logger.info( " begin " + testInfo.getTestMethod().get().getName() );
+   }
+   
+   /**
+    * destroyed parameters after test
+    * 
+    * @param testInfo : content parameters current test 
+    */
+   @AfterEach
+   void destroyParamsTest( TestInfo testInfo )
+   {
+      logger.info( "destroyParamsTest" );
+      String callingTest = testInfo.getTestMethod().get().getName();
+      logger.info( " end " + callingTest );
+      subSequenceList = null;
+      expected = null;
+   }
+   
    /**
     * 
     */
    @Test
    public void sequencageGenome01Test()
    {
-      String[] subSequenceList = { "AAC", "CCTT" };
-      assertEquals( "AACCTT", sequencageGenome.optimalSequence( subSequenceList ) );
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
    }
    
    /**
@@ -59,8 +135,7 @@ public class SequencageGenomeTest
    @Test
    public void sequencageGenome02Test()
    {
-      String[] subSequenceList = { "AGATTA", "GATTACA", "TACAGA" };
-      assertEquals( "AGATTACAGA", sequencageGenome.optimalSequence( subSequenceList ) );
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
    }
    
    /**
@@ -69,8 +144,7 @@ public class SequencageGenomeTest
    @Test
    public void sequencageGenome03Test()
    {
-      String[] subSequenceList = { "TT", "AA", "ACT" };
-      assertEquals( "AACTT", sequencageGenome.optimalSequence( subSequenceList ) );
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
    }
    
    /**
@@ -79,8 +153,7 @@ public class SequencageGenomeTest
    @Test
    public void sequencageGenome04Test()
    {
-      String[] subSequenceList = { "GAT", "AGATTA" };
-      assertEquals( "AGATTA", sequencageGenome.optimalSequence( subSequenceList ) );
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
    }
    
    /**
@@ -89,8 +162,7 @@ public class SequencageGenomeTest
    @Test
    public void sequencageGenome05Test()
    {
-      String[] subSequenceList = { "CCCTG", "TGACA", "CATGA" };
-      assertEquals( "CCCTGACATGA", sequencageGenome.optimalSequence( subSequenceList ) );
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
    }
    
    /**
@@ -99,7 +171,24 @@ public class SequencageGenomeTest
    @Test
    public void sequencageGenome06Test()
    {
-      String[] subSequenceList = { "AGATTA", "GATTACA", "TACAGA" };
-      assertEquals( "AGATTACAGA", sequencageGenome.optimalSequence( subSequenceList ) );
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
+   }
+   
+   /**
+    * 
+    */
+   @Test
+   public void sequencageGenome07Test()
+   {
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
+   }
+   
+   /**
+    * 
+    */
+   @Test
+   public void sequencageGenome08Test()
+   {
+      assertEquals( expected, sequencageGenome.optimalSequence( subSequenceList ) );
    }
 }

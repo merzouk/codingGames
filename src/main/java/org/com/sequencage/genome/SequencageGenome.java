@@ -19,6 +19,8 @@
 
 package org.com.sequencage.genome;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -123,8 +125,9 @@ import org.springframework.stereotype.Service;
 @Service("sequencageGenome")
 public class SequencageGenome
 {
-   private final int lengthRef = 1000000;
+   private static final Logger logger    = LoggerFactory.getLogger( SequencageGenome.class );
    
+   private final int           lengthRef = 1000000;
    public final String optimalSequence( final String[] subSequenceList )
    {
       if( subSequenceList == null || subSequenceList.length == 0 )
@@ -169,9 +172,9 @@ public class SequencageGenome
                buffer = finalConctString;
             }
             String res1 = buildSequence( buffer, subSequenceList[index] );
-            //System.err.println( buffer + "  et  " + subSequenceList[index] + "    " + res1 );
+            logger.debug( buffer + "  et  " + subSequenceList[index] + "    " + res1 );
             String res2 = buildSequence( subSequenceList[index], buffer );
-            //System.err.println( subSequenceList[index] + "   et  " + buffer + "     " + res2 );
+            logger.debug( subSequenceList[index] + "   et  " + buffer + "     " + res2 );
             if( res1 != null && res2 != null )
             {
                if( res1.length() < res2.length() )
@@ -244,7 +247,7 @@ public class SequencageGenome
          {
             if( array1[i] != array2[j] )
             {
-               //System.err.println( i + "     " + array1[i] + "        " + j + "           " + array2[j] );
+               logger.debug( i + "     " + array1[i] + "        " + j + "           " + array2[j] );
                i--;
             }
             else
@@ -265,18 +268,17 @@ public class SequencageGenome
                if( k == array1.length )
                {
                   finalSequence = subSequence1;
-                  //System.err.println( finalSequence );
+                  logger.debug( finalSequence );
                   for( m = j; m < array2.length; m++ )
                   {
                      finalSequence += array2[m];
-                     //System.err.println( "l   " + l + "     " + finalSequence );
+                     logger.debug( "k   " + k + "     " + finalSequence );
                   }
                   if( m == array2.length )
                   {
                      return finalSequence;
                   }
-                  // System.err.println(i + " " + array1[i] + " " + j + "
-                  // " + array2[j]);
+                  logger.debug( i + " " + array1[i] + " " + j + " " + array2[j] );
                }
             }
          }
