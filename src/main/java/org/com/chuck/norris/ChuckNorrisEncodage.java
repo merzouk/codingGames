@@ -78,53 +78,69 @@ public class ChuckNorrisEncodage
    {
       logger.info( "str : " + str );
       if( str == null || str.isEmpty() ) return "";
-      char[] array = str.toCharArray();
-      String transform = "", result = "";
-      for( int i = 0; i < array.length; transform += "" + Integer.toBinaryString( array[i++] ));
-      logger.info( "transform : " + transform );
+      String transform = convertCharToAsciiCode( str ), result = "";
       int i = 0;
-      boolean premierPassage = true;
       while( i < transform.length() )
       {
-         char c = transform.charAt( i );
-         if( c == '0' )
-         {
-            String s = getSerieDeZero( i, transform, '0' );
-            i += s.length();
-            result += ( premierPassage ) ? ( "00 " + s ) : ( " 00 " + s );
-            premierPassage = false;
-         }
-         if( c == '1' )
-         {
-            String s = getSerieDeZero( i, transform, '1' );
-            i += s.length();
-            result += ( premierPassage ) ? ( "0 " + s ) : ( " 0 " + s );
-            premierPassage = false;
-         }
+         String get = getSerieBit( i, transform );
+         if( get.contains( "0" ) )
+            result += ( result.length() == 0 ) ? ( "00 " + buildSerieZero( get ) ) : ( " 00 " + buildSerieZero( get ) );
+         else
+            result += ( result.length() == 0 ) ? ( "0 " + buildSerieZero( get ) ) : ( " 0 " + buildSerieZero( get ) );
+         i += get.length();
       }
       return result;
    }
    
    /**
     * 
-    * @param pos
     * @param str
     * @return
     */
-   private String getSerieDeZero( int pos, String str, char controler )
+   private String convertCharToAsciiCode( String str )
    {
-      String s = "0";
-      boolean t = false;
-      int i = 1;
-      while( !t && ( pos + i ) < str.length() )
+      StringBuilder binary = new StringBuilder();
+      char[] chars = str.toCharArray();
+      for( int j = 0; j < chars.length; j++ )
       {
-         char c = str.charAt( pos + i );
-         if( c == controler )
-            s += "0";
-         else
-            t = true;
-         i++;
+         int val = chars[j];
+         for( int i = 0; i < 7; i++ )
+         {
+            val <<= 1;
+            binary.append( ( val & 128 ) == 0 ? 0 : 1 );
+         }
       }
-      return s;
+      return binary.toString();
+   }
+   
+   private String buildSerieZero( String get )
+   {
+      String str = "";
+      for( int i = 0; i < get.length(); i++ )
+         str += "0";
+      return str;
+   }
+   
+   private String getSerieBit( int index, String str )
+   {
+      char c = str.charAt( index );
+      String result = "" + c;
+      do
+      {
+         if( index < str.length() - 1 )
+         {
+            index++;
+            char s = str.charAt( index );
+            if( s == c )
+               result += c;
+            else
+               break;
+         }
+         else
+         {
+            break;
+         }
+      } while( true );
+      return result;
    }
 }
