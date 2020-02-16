@@ -56,6 +56,18 @@ public class SandpileAdditionTest
       logger.info( "initParams" );
       switch( testInfo.getTestMethod().get().getName() )
       {
+         case "sandpileAddition09Test":
+            array1 = new String[] { "000", "030", "000" };
+            array2 = new String[] { "000", "030", "000" };
+            expected = new int[][] { { 0, 1, 0 }, { 1, 2, 1 }, { 0, 1, 0 } };
+            matrixSize = 3;
+            break;
+         case "sandpileAddition08Test":
+            array1 = new String[] { "000", "020", "000" };
+            array2 = new String[] { "000", "020", "000" };
+            expected = new int[][] { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 1, 0 } };
+            matrixSize = 3;
+            break;
          case "sandpileAddition07Test":
             array1 = new String[] { "12123212", "21221323", "13231321", "30232213", "01123100", "32203321", "32303321", "32123321" };
             array2 = new String[] { "30321311", "20231002", "12303321", "31231321", "12312323", "13123121", "13132121", "32303321" };
@@ -129,6 +141,20 @@ public class SandpileAdditionTest
    }
    
    @Test
+   public void sandpileAddition09Test() throws Exception
+   {
+      logger.info( "sandpileAddition09Test" );
+      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+   }
+   
+   @Test
+   public void sandpileAddition08Test() throws Exception
+   {
+      logger.info( "sandpileAddition08Test" );
+      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+   }
+   
+   @Test
    public void sandpileAddition07Test() throws Exception
    {
       logger.info( "sandpileAddition07Test" );
@@ -198,11 +224,9 @@ public class SandpileAdditionTest
       assertNotNull( array );
       assertEquals( n, array.length );
       assertEquals( n, array[0].length );
-   
       assertNotNull( expected );
       assertEquals( n, expected.length );
-      assertEquals( n, expected[0].length );      
-      
+      assertEquals( n, expected[0].length );
       for( int i = 0; i < n; i++ )
       {
          for( int j = 0; j < n; j++ )
