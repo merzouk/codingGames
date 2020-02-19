@@ -67,6 +67,14 @@ public class ChuckNorrisEncodageTest
     * 
     */
    @Test
+   public void chuckNorrisEncodage16Test()
+   {
+      assertEquals( "0 0 00 00000 0 00 00 0000 0 0 00 0 0 0 00 0000 0 000 00 000 0 0 00 00 0 0 00 000 0 0 00 0 0 00 00 000 0 00 00 0 0 0 00 000 0 0000 00 00 0 0 00 000 0 0 00 00 0 0 00 00 0 00 00 00 0 0 00 0 0 0 00 0 0 0 00 00 0 0 00 0 0 000 00 00 0 00 00 00 0 0 00 00 0 00 00 0 0 00 00 00 0 000 00 0 0 0 00 00 0 00000 00 0 0 0 00 0000 0 0 00 0 0 0 00 000 0 00 00 0 0 0 00 00 0 0 00 0 0 0 00 0 0 0 00 00 0 000 00 0 0 0 00 0 0 0 00 00 0 0 00 0 0 0 00 0 0 0 00 0 0 00 00 0 0 0 00 0 0 00 00 0 0 0 00 0 0 0 00 0 0 0000 00 0 0 00 00 000 0 0 00 0 0 00 00 00 0 00 00 0 0 00 00 0 0 0 00 0", chuckNorrisEncodage.chuckNorrisEncode( "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ) );
+   }
+   /**
+    * 
+    */
+   @Test
    public void chuckNorrisEncodage04Test()
    {
       assertEquals( "0 0 00 0000 0 00 00 0 0 0 00 00000 0 0 00 0000 0 00", chuckNorrisEncodage.chuckNorrisEncode( "C C" ) );
