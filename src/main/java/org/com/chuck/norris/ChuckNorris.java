@@ -70,24 +70,29 @@ public class ChuckNorris
 {
    public String v( String s )
    {
-      if( s == null || s.isEmpty() ) return "";
+      String t = "", g;
       int i, j, v;
-      char[] c = s.toCharArray();
-      String t = "";
-      s = "";
-      for( j = 0; j < c.length; j++ )
+      for( i = 0; i < s.length(); i++ )
       {
-         v = c[j];
-         for( i = 0; i < 7; i++ )
+         v = s.charAt( i );
+         for( j = 0; j < 7; j++ )
          {
             v <<= 1;
             t += ( ( v & 128 ) == 0 ? 0 : 1 );
          }
       }
       i = 0;
+      s = "";
       while( i < t.length() )
       {
-         String g = b( i, t );
+         j = i;
+         char c = t.charAt( j );
+         g = "";
+         while( j < t.length() && t.charAt( j ) == c )
+         {
+            j++;
+            g += c;
+         }
          if( g.contains( "0" ) )
             s += ( i == 0 ) ? ( "00 " + g ) : ( " 00 " + g );
          else
@@ -95,25 +100,5 @@ public class ChuckNorris
          i += g.length();
       }
       return s;
-   }
-   
-   String b( int i, String s )
-   {
-      char c = s.charAt( i );
-      String r = c + "";
-      do
-      {
-         if( i < s.length() - 1 )
-         {
-            i++;
-            if( s.charAt( i ) == c )
-               r += c;
-            else
-               break;
-         }
-         else
-            break;
-      } while( true );
-      return r;
    }
 }
