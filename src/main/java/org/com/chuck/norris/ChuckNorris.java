@@ -93,10 +93,7 @@ public class ChuckNorris
             j++;
             g += c;
          }
-         if( g.contains( "0" ) )
-            s += ( i == 0 ) ? ( "00 " + g ) : ( " 00 " + g );
-         else
-            s += ( i == 0 ) ? ( "0 " + g.replace( "1", "0" ) ) : ( " 0 " + g.replace( "1", "0" ) );
+         s += ( c == '0' ) ? ( ( i == 0 ) ? ( "00 " + g ) : ( " 00 " + g ) ) : ( ( i == 0 ) ? ( "0 " + g.replace( "1", "0" ) ) : ( " 0 " + g.replace( "1", "0" ) ) );
          i += g.length();
       }
       return s;
