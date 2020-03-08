@@ -71,30 +71,19 @@ public class ChuckNorris
    public String v( String s )
    {
       String t = "", g;
-      int i, j, v;
-      for( i = 0; i < s.length(); i++ )
-      {
-         v = s.charAt( i );
-         for( j = 0; j < 7; j++ )
-         {
-            v <<= 1;
-            t += ( ( v & 128 ) == 0 ? 0 : 1 );
-         }
-      }
-      i = 0;
+      int i = 0, j, k = 0;
+      for( char r : s.toCharArray() )
+         for( j = 0; j < 7; j++, r <<= 1, t += ( r & 128 ) == 0 ? 0 : 1, k++ );
       s = "";
-      while( i < t.length() )
+      while( i < k )
       {
          j = i;
          char c = t.charAt( j );
          g = "";
-         while( j < t.length() && t.charAt( j ) == c )
-         {
-            j++;
-            g += c;
-         }
-         s += ( c == '0' ) ? ( ( i == 0 ) ? ( "00 " + g ) : ( " 00 " + g ) ) : ( ( i == 0 ) ? ( "0 " + g.replace( "1", "0" ) ) : ( " 0 " + g.replace( "1", "0" ) ) );
-         i += g.length();
+         for( ; j < k && t.charAt( j ) == c; j++, g += '0' )
+            ;
+         s += c == '0' ? i == 0 ? "00 " + g : " 00 " + g : i == 0 ? "0 " + g : " 0 " + g;
+         i += j - i;
       }
       return s;
    }
