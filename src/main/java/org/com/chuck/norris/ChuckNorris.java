@@ -73,7 +73,7 @@ public class ChuckNorris
       String t = "", g;
       int i = 0, j, k = 0;
       for( char r : s.toCharArray() )
-         for( j = 0; j < 7; j++, r <<= 1, t += ( r & 128 ) == 0 ? 0 : 1, k++ );
+         for( j = 0; j < 7; j++, r <<= 1, t += ( r & 128 ) == 0 ? 0 : 1, k++ )
       s = "";
       while( i < k )
       {
