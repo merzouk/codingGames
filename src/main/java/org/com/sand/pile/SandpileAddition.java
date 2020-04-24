@@ -51,21 +51,23 @@ public class SandpileAddition
       for( int i = 0; i < n; i++ )
       {
          String s = row1[i];
-         for( int j = 0; j < row1.length; j++ ) array[i][j] = Integer.parseInt( s.substring( j, j + 1  ));
+         for( int j = 0; j < row1.length; j++ )
+            array[i][j] = Integer.parseInt( s.substring( j, j + 1 ) );
       }
       for( int i = 0; i < n; i++ )
       {
          String s = row2[i];
-         for( int j = 0; j < row2.length; j++ ) array[i][j] += Integer.parseInt( s.substring( j, j + 1 ) );
+         for( int j = 0; j < row2.length; j++ )
+            array[i][j] += Integer.parseInt( s.substring( j, j + 1 ) );
       }
       return formaterResultatSortie( distribuerGrainsSurCase( array, n, limitSupCase ), n );
    }
    
    private int[][] formaterResultatSortie( int[][] array, int n )
    {
-      for( int i = 0; i < n; i++ )
+      for( int i = 0; i < array.length; i++ )
       {
-         for( int j = 0; j < n; j++ )
+         for( int j = 0; j < array[i].length; j++ )
          {
             //System.out.print( array[i][j] );
          }
@@ -77,7 +79,7 @@ public class SandpileAddition
    private int[][] distribuerGrainsSurCase( int[][] array, int n, int limitSupCase )
    {
       CaseTrouvee caseTrouvee = null;
-      while( ( caseTrouvee = chercherCase( array, n, limitSupCase ) ) != null )
+      while( ( caseTrouvee = chercherCase( array, limitSupCase ) ) != null )
          distribuerSurLesCases( array, n, caseTrouvee, limitSupCase );
       return array;
    }
@@ -93,19 +95,28 @@ public class SandpileAddition
       if( j + 1 < n ) array[i][j + 1] += 1;
    }
    
-   private CaseTrouvee chercherCase( int[][] array, int n, int limitSupCase )
+   private CaseTrouvee chercherCase( int[][] array, int limitSupCase )
    {
-      for( int i = 0; i < n; i++ )
+      for( int i = 0; i < array.length; i++ )
       {
-         for( int j = 0; j < n; j++ ) if( array[i][j] >= limitSupCase ) return new CaseTrouvee( i, j );
+         for( int j = 0; j < array[i].length; j++ )
+            if( array[i][j] >= limitSupCase ) return new CaseTrouvee( i, j );
       }
       return null;
    }
+   /**
+    * 
+    * A Renseigner.
+    * @author  : Merzouk
+    * @project : codingGames
+    * @package : org.com.sand.pile
+    * @date : 7 févr. 2020 21:00:56
+    */
    class CaseTrouvee
    {
-      public final int i;
+      final int i;
       
-      public final int j;
+      final int j;
       public CaseTrouvee( int i, int j )
       {
          this.i = i;
