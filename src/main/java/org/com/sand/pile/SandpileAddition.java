@@ -39,68 +39,73 @@ public class SandpileAddition
    private static final Logger logger = LoggerFactory.getLogger( SandpileAddition.class );
    /**
     * 
-    * @param limitSupCase
-    * @param row1
-    * @param row2
+    * @param lmt
+    * @param r1
+    * @param r2
     */
-   public int[][] sandPile( int limitSupCase, String[] row1, String[] row2 )
+   public int[][] sandPile( int lmt, String[] r1, String[] r2 )
    {
       logger.info( "sand Pile Addition" );
-      int[][] array = new int[row1.length][row1.length];
-      for( int i = 0; i < row1.length; i++ )
+      int[][] a = new int[r1.length][r1.length];
+      for( int i = 0; i < r1.length; i++ )
       {
-         String s = row1[i];
-         String t = row2[i];
-         for( int j = 0; j < row1.length; j++ )
-            array[i][j] = Integer.parseInt( s.substring( j, j + 1 ) ) + Integer.parseInt( t.substring( j, j + 1 ) );
+         String s = r1[i];
+         String t = r2[i];
+         for( int j = 0; j < r1.length; j++ )
+            a[i][j] = Integer.parseInt( s.substring( j, j + 1 ) ) + Integer.parseInt( t.substring( j, j + 1 ) );
       }
-      return formaterResultatSortie( distribuerGrainsSurCase( array, limitSupCase ), row1.length );
+      return formaterResultatSortie( distribuerGrainsSurCase( a, lmt ) );
    }
    
-   private int[][] formaterResultatSortie( int[][] array, int n )
+   private int[][] formaterResultatSortie( int[][] a )
    {
-      for( int i = 0; i < array.length; i++ )
+      for( int i = 0; i < a.length; i++ )
       {
-         for( int j = 0; j < array[i].length; j++ )
+         for( int j = 0; j < a[i].length; j++ )
          {
             //System.out.print( array[i][j] );
          }
          //System.out.println();
       }
-      return array;
+      return a;
    }
    
-   private int[][] distribuerGrainsSurCase( int[][] array, int limitSupCase )
+   private int[][] distribuerGrainsSurCase( int[][] a, int lmt )
    {
       CaseTrouvee caseTrouvee = null;
-      while( ( caseTrouvee = chercherCase( array, limitSupCase ) ) != null )
-         distribuerSurLesCases( array, array.length, caseTrouvee, limitSupCase );
-      return array;
+      while( ( caseTrouvee = chercherCase( a, lmt ) ) != null )
+         distribuerSurLesCases( a, caseTrouvee, lmt );
+      return a;
    }
    
-   private void distribuerSurLesCases( int[][] array, int n, CaseTrouvee caseTrouvee, int limitSupCase )
+   private void distribuerSurLesCases( int[][] a, CaseTrouvee c, int lmt )
    {
-      int i = caseTrouvee.i;
-      int j = caseTrouvee.j;
-      array[i][j] -= limitSupCase;
-      if( i - 1 >= 0 && i - 1 < n ) array[i - 1][j] += 1;
-      if( i + 1 < n ) array[i + 1][j] += 1;
-      if( j - 1 >= 0 && j - 1 < n ) array[i][j - 1] += 1;
-      if( j + 1 < n ) array[i][j + 1] += 1;
-   }
-   
-   private CaseTrouvee chercherCase( int[][] array, int limitSupCase )
-   {
-      for( int i = 0; i < array.length; i++ )
+      int lgn = c.lgn;
+      int col = c.col;
+      int n = a.length;
+      if( a[lgn][col] >= lmt )
       {
-         for( int j = 0; j < array[i].length; j++ )
-            if( array[i][j] >= limitSupCase ) return new CaseTrouvee( i, j );
+         a[lgn][col] -= lmt;
+         if( lgn - 1 >= 0 && lgn - 1 < n ) a[lgn - 1][col] += 1;
+         if( lgn + 1 < n ) a[lgn + 1][col] += 1;
+         if( col - 1 >= 0 && col - 1 < n ) a[lgn][col - 1] += 1;
+         if( col + 1 < n ) a[lgn][col + 1] += 1;
+      }
+   }
+   
+   private CaseTrouvee chercherCase( int[][] a, int lmt )
+   {
+      for( int i = 0; i < a.length; i++ )
+      {
+         for( int j = 0; j < a[i].length; j++ )
+            if( a[i][j] >= lmt ) return new CaseTrouvee( i, j );
       }
       return null;
    }
    /**
     * 
-    * A Renseigner.
+    * compte les coordonnees du point dont la valeur est superieure a la limite
+    * 
     * @author  : Merzouk
     * @project : codingGames
     * @package : org.com.sand.pile
@@ -108,13 +113,18 @@ public class SandpileAddition
     */
    class CaseTrouvee
    {
-      final int i;
+      final int lgn;
       
-      final int j;
-      public CaseTrouvee( int i, int j )
+      final int col;
+      /**
+       * 
+       * @param lgn : indice de la ligne
+       * @param col : indice de la colonne
+       */
+      public CaseTrouvee( int lgn, int col )
       {
-         this.i = i;
-         this.j = j;
+         this.lgn = lgn;
+         this.col = col;
       }
    }
 }
