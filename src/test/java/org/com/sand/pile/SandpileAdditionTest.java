@@ -43,7 +43,6 @@ public class SandpileAdditionTest
    
    private int[][]             expected     = null;
    
-   private int                 matrixSize   = 0;
    /**
     * initialized parameters before test
     * 
@@ -60,67 +59,56 @@ public class SandpileAdditionTest
             array1 = new String[] { "1221", "1321", "2111","3123" };
             array2 = new String[] { "1313", "1302", "1231","3210" };
             expected = new int[][] { { 2, 3, 0, 3 }, { 0, 3, 3, 3 }, { 2, 1, 0 , 3}, {2, 2, 1, 2} };
-            matrixSize = 4;
             break;
          case "sandpileAddition09Test":
             array1 = new String[] { "000", "030", "000" };
             array2 = new String[] { "000", "030", "000" };
             expected = new int[][] { { 0, 1, 0 }, { 1, 2, 1 }, { 0, 1, 0 } };
-            matrixSize = 3;
             break;
          case "sandpileAddition08Test":
             array1 = new String[] { "000", "020", "000" };
             array2 = new String[] { "000", "020", "000" };
             expected = new int[][] { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 1, 0 } };
-            matrixSize = 3;
             break;
          case "sandpileAddition07Test":
             array1 = new String[] { "12123212", "21221323", "13231321", "30232213", "01123100", "32203321", "32303321", "32123321" };
             array2 = new String[] { "30321311", "20231002", "12303321", "31231321", "12312323", "13123121", "13132121", "32303321" };
             expected = new int[][] { { 2, 0, 1, 3, 3, 3, 1, 2 }, { 1, 3, 3, 3, 2, 1, 3, 0 }, { 3, 2, 3, 3, 1, 0, 2, 1 }, { 3, 3, 2, 1, 1, 3, 3, 3 }, { 0, 1, 2, 3, 2, 1, 2, 1 }, { 3, 2, 3, 1, 3, 2, 0, 3 }, { 1, 3, 1, 3, 2, 3, 3, 3 }, { 2, 1, 3, 2, 3, 1, 3, 3 } };
-            matrixSize = 8;
             break;
          case "sandpileAddition06Test":
             array1 = new String[] { "31003", "13120", "01310", "02131", "30013" };
             array2 = new String[] { "11111", "12221", "12321", "12221", "11111" };
             expected = new int[][] { { 2, 2, 1, 1, 2 }, { 2, 3, 3, 2, 1 }, { 1, 3, 2, 3, 1 }, { 1, 2, 3, 3, 2 }, { 2, 1, 1, 2, 2 } };
-            matrixSize = 5;
             break;
          case "sandpileAddition05Test":
             array1 = new String[] { "1212321", "1221323", "1231321", "3032213", "0123100", "3203321", "3203321" };
             array2 = new String[] { "3032131", "0231002", "2303321", "1231321", "1232323", "1323121", "1332121" };
             expected = new int[][] { { 1, 1, 1, 2, 2, 0, 1 }, { 3, 1, 3, 2, 2, 1, 3 }, { 3, 2, 3, 1, 2, 2, 3 }, { 0, 2, 3, 3, 2, 2, 0 }, { 2, 2, 1, 3, 3, 3, 2 }, { 3, 0, 3, 3, 3, 0, 3 }, { 3, 1, 2, 0, 2, 2, 3 } };
-            matrixSize = 7;
             break;
          case "sandpileAddition04Test":
             array1 = new String[] { "121", "202", "121" };
             array2 = new String[] { "020", "202", "020" };
             expected = new int[][] { { 3, 1, 3 }, { 1, 0, 1 }, { 3, 1, 3 } };
-            matrixSize = 3;
             break;
          case "sandpileAddition03Test":
             array1 = new String[] { "121321", "122323", "123121", "303213", "023100", "303321" };
             array2 = new String[] { "303213", "023100", "303321", "121321", "122323", "123121" };
             expected = new int[][] { { 0, 3, 2, 3, 3, 0 }, { 2, 1, 3, 1, 3, 2 }, { 1, 3, 3, 1, 3, 3 }, { 1, 3, 2, 2, 3, 0 }, { 2, 3, 0, 2, 3, 2 }, { 1, 0, 2, 3, 3, 2 } };
-            matrixSize = 6;
             break;
          case "sandpileAddition02Test":
             array1 = new String[] { "000", "020", "000" };
             array2 = new String[] { "000", "020", "000" };
             expected = new int[][] { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 1, 0 } };
-            matrixSize = 3;
             break;
          case "sandpileAddition01Test":
             array1 = new String[] { "121", "232", "121" };
             array2 = new String[] { "303", "000", "303" };
             expected = new int[][] { { 2, 1, 2 }, { 1, 3, 1 }, { 2, 1, 2 } };
-            matrixSize = 3;
             break;
          case "sandpileAddition00Test":
             array1 = new String[] { "121", "232", "121" };
             array2 = new String[] { "303", "000", "303" };
             expected = new int[][] { { 1, 1, 2 }, { 0, 3, 1 }, { 2, 0, 2 } };
-            matrixSize = 3;
             break;
          default:
             break;
@@ -143,84 +131,83 @@ public class SandpileAdditionTest
       array1 = null;
       array2 = null;
       expected = null;
-      matrixSize = 0;
    }
    
    @Test
    public void sandpileAddition10Test() throws Exception
    {
       logger.info( "sandpileAddition10Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition09Test() throws Exception
    {
       logger.info( "sandpileAddition09Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition08Test() throws Exception
    {
       logger.info( "sandpileAddition08Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition07Test() throws Exception
    {
       logger.info( "sandpileAddition07Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition06Test() throws Exception
    {
       logger.info( "sandpileAddition06Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition05Test() throws Exception
    {
       logger.info( "sandpileAddition05Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition04Test() throws Exception
    {
       logger.info( "sandpileAddition04Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition03Test() throws Exception
    {
       logger.info( "sandpileAddition03Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition02Test() throws Exception
    {
       logger.info( "sandpileAddition02Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition01Test() throws Exception
    {
       logger.info( "sandpileAddition01Test" );
-      assertEquals( true, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( true, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    @Test
    public void sandpileAddition00Test() throws Exception
    {
       logger.info( "sandpileAddition01Test" );
-      assertEquals( false, compareMatrices( matrixSize, sandpileAddition.sandPile( matrixSize, limitSupCase, array1, array2 ), expected ) );
+      assertEquals( false, compareMatrices( array1.length, sandpileAddition.sandPile(  limitSupCase, array1, array2 ), expected ) );
    }
    
    /**

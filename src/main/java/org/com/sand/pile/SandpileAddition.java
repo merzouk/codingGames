@@ -39,28 +39,22 @@ public class SandpileAddition
    private static final Logger logger = LoggerFactory.getLogger( SandpileAddition.class );
    /**
     * 
-    * @param n
     * @param limitSupCase
     * @param row1
     * @param row2
     */
-   public int[][] sandPile( int n, int limitSupCase, String[] row1, String[] row2 )
+   public int[][] sandPile( int limitSupCase, String[] row1, String[] row2 )
    {
       logger.info( "sand Pile Addition" );
-      int[][] array = new int[n][n];
-      for( int i = 0; i < n; i++ )
+      int[][] array = new int[row1.length][row1.length];
+      for( int i = 0; i < row1.length; i++ )
       {
          String s = row1[i];
+         String t = row2[i];
          for( int j = 0; j < row1.length; j++ )
-            array[i][j] = Integer.parseInt( s.substring( j, j + 1 ) );
+            array[i][j] = Integer.parseInt( s.substring( j, j + 1 ) ) + Integer.parseInt( t.substring( j, j + 1 ) );
       }
-      for( int i = 0; i < n; i++ )
-      {
-         String s = row2[i];
-         for( int j = 0; j < row2.length; j++ )
-            array[i][j] += Integer.parseInt( s.substring( j, j + 1 ) );
-      }
-      return formaterResultatSortie( distribuerGrainsSurCase( array, n, limitSupCase ), n );
+      return formaterResultatSortie( distribuerGrainsSurCase( array, limitSupCase ), row1.length );
    }
    
    private int[][] formaterResultatSortie( int[][] array, int n )
@@ -76,11 +70,11 @@ public class SandpileAddition
       return array;
    }
    
-   private int[][] distribuerGrainsSurCase( int[][] array, int n, int limitSupCase )
+   private int[][] distribuerGrainsSurCase( int[][] array, int limitSupCase )
    {
       CaseTrouvee caseTrouvee = null;
       while( ( caseTrouvee = chercherCase( array, limitSupCase ) ) != null )
-         distribuerSurLesCases( array, n, caseTrouvee, limitSupCase );
+         distribuerSurLesCases( array, array.length, caseTrouvee, limitSupCase );
       return array;
    }
    
