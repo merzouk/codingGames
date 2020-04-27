@@ -61,8 +61,7 @@ public class SandpileAddition
    {
       for( int i = 0; i < a.length; i++ )
       {
-         for( int j = 0; j < a[i].length; System.out.print( a[i][j++] ) )
-            ;
+         for( int j = 0; j < a[i].length; System.out.print( a[i][j++] ) );
          System.out.println();
       }
       return a;
