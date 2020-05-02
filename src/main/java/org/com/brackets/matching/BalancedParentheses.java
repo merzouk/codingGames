@@ -32,8 +32,8 @@ import org.springframework.stereotype.Service;
  * Input: exp = "[(])"  ->  Output: Not Balanced
  * 
  * @author  : Merzouk
- * @project : Exercices-coding-games
- * @package : org.com.compare.str
+ * @project : codingGames
+ * @package : org.com.brackets.matching
  * @date    : 10 févr. 2020 16:06:48
  */
 @Service("balancedParentheses")
