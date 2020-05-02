@@ -36,21 +36,20 @@ import org.springframework.stereotype.Service;
  * @package : org.com.compare.str
  * @date    : 10 févr. 2020 16:06:48
  */
-@Service("bracketsMatching")
-public class BracketsMatching
+@Service("balancedParentheses")
+public class BalancedParentheses
 {
-   private final char[][] caracters = { 
-                                          { '{', '}' }, 
-                                          { '(', ')' }, 
-                                          { '[', ']' } 
-                                      };
+
+   private static final char[] caractersOpened = { '{', '(', '[', };
+   
+   private static final char[] caractersClosed = { '}', ')', ']' };
    /**
     * 
     * @param balancedStr
     * 
     * @return
     */
-   public boolean checkBracketsMatching( final String balancedStr )
+   public boolean checkParenthesesMatching( final String balancedStr )
    {
       if( balancedStr == null || balancedStr.isEmpty() ) return true;
       
@@ -67,13 +66,13 @@ public class BracketsMatching
             else
             {
                boolean charFounded = false;
-               for( int j = 0; j < caracters.length; j++ )
+               for( int j = 0; j < caractersOpened.length; j++ )
                {
                   //we have found the character '?'
-                  if( caracters[j][1] == currentCharRead )
+                  if( caractersClosed[j] == currentCharRead )
                   {
                      //we have the character '?' we have to found '?'
-                     if( caracters[j][0] == getChar( checked ) )
+                     if( caractersOpened[j] == getChar( checked ) )
                      {
                         //we remove the opposite character
                         checked = checked.substring( 0, checked.length() - 1 );
@@ -95,9 +94,9 @@ public class BracketsMatching
    
    private boolean checkChar( char currentCharRead )
    {
-      for( int i = 0; i < caracters.length; i++ )
+      for( int i = 0; i < caractersOpened.length; i++ )
       {
-         if( caracters[i][0] == currentCharRead ) return true;
+         if( caractersOpened[i] == currentCharRead ) return true;
       }
       return false;
    }
