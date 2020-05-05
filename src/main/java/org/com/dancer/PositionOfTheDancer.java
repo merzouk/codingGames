@@ -49,10 +49,10 @@ public class PositionOfTheDancer
    {
       int position = 0;
       int step1 = 1;
-      position = position + step1;
+      position += step1;
       iterationNumber -= 1;
       int step2 = -2;
-      position = position + step2;
+      position += step2;
       iterationNumber -= 1;
       while( iterationNumber > 0 )
       {
