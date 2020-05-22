@@ -42,7 +42,7 @@ public class CompareString
             if( trouve == false && ch1[i] == ch2[j] )
             {
                //un char controlé est supprimé
-               ch2 = replace( ch2, j );
+               ch2 = deleteChar( ch2, j );
                //le char de ch1 recherché dans ch2 est trouvé
                trouve = true;
             }
@@ -65,7 +65,7 @@ public class CompareString
     * 
     * @return : le tableau de char ou le char d'index est supprimé
     */
-   private char[] replace( char[] ch, int index )
+   private char[] deleteChar( char[] ch, int index )
    {
       if( index > ch.length || ch.length == 0 )
       {
