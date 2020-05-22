@@ -1,3 +1,4 @@
+
 package org.com.compare.str;
 
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class CompareString
             if( trouve == false && ch1[i] == ch2[j] )
             {
                //un char controlé est supprimé
-               ch2[j] = ' ';
+               ch2 = replace( ch2, j );
                //le char de ch1 recherché dans ch2 est trouvé
                trouve = true;
             }
@@ -54,5 +55,32 @@ public class CompareString
          }
       }
       return true;
+   }
+   
+   /**
+    * supprime le char trouve
+    * 
+    * @param ch : la chaine dont laquelle on supprime le char
+    * @param index : l'index du char à supprimer
+    * 
+    * @return : le tableau de char ou le char d'index est supprimé
+    */
+   private char[] replace( char[] ch, int index )
+   {
+      if( index > ch.length )
+      {
+         return ch;
+      }
+      char[] c = new char[ch.length - 1];
+      int j = 0;
+      for( int i = 0; i < ch.length; i++ )
+      {
+         if( i != index )
+         {
+            c[j] = ch[i];
+            j++;
+         }
+      }
+      return c;
    }
 }
