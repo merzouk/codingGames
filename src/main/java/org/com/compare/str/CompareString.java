@@ -67,7 +67,7 @@ public class CompareString
     */
    private char[] replace( char[] ch, int index )
    {
-      if( index > ch.length )
+      if( index > ch.length || ch.length == 0 )
       {
          return ch;
       }
